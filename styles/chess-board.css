@@ -1,0 +1,330 @@
+/* Chess.com Tarzı Gerçekçi Satranç Tahtası - chess-board.css */
+
+/* Ana Satranç Tahtası */
+.chess-board {
+    display: grid;
+    grid-template-columns: repeat(8, 80px);
+    grid-template-rows: repeat(8, 80px);
+    border: 3px solid #8ca2ad;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 
+        0 0 0 1px #3d3d3d,
+        0 8px 24px rgba(0, 0, 0, 0.5),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    background: #eeeed2;
+}
+
+/* Chess Squares */
+.chess-square {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 3.5rem;
+    user-select: none;
+}
+
+/* Chess.com Style Colors */
+.chess-square.light {
+    background-color: #eeeed2;
+}
+
+.chess-square.dark {
+    background-color: #769656;
+}
+
+/* Hover Effect */
+.chess-square:hover {
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Selected Square */
+.chess-square.selected {
+    background-color: #f7f769 !important;
+    box-shadow: inset 0 0 0 3px #ffff00;
+}
+
+/* Valid Move Indicators */
+.chess-square.valid-move::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle, #3d3d3d 30%, rgba(61, 61, 61, 0.3) 30%);
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Attack Move Indicators */
+.chess-square.attack-move::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    bottom: 4px;
+    left: 4px;
+    border: 3px solid #d9534f;
+    border-radius: 50%;
+    background: transparent;
+}
+
+/* Last Move Highlighting */
+.chess-square.last-move {
+    background-color: #f7f769 !important;
+}
+
+/* Check Status */
+.chess-square.check {
+    background-color: #ff6b6b !important;
+    animation: checkFlash 1s ease-in-out infinite;
+}
+
+@keyframes checkFlash {
+    0%, 100% { background-color: #ff6b6b !important; }
+    50% { background-color: #ff9999 !important; }
+}
+
+/* Chess Pieces */
+.chess-piece {
+    font-size: 3.5rem;
+    transition: all 0.2s ease;
+    cursor: grab;
+    position: relative;
+    z-index: 1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.chess-piece:hover {
+    transform: scale(1.05);
+    z-index: 2;
+}
+
+.chess-piece:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+/* Beyaz Taşlar - Basitleştirilmiş */
+.white-piece {
+    color: #ffffff;
+    /* Geçici olarak text-shadow kaldırıldı */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+/* Siyah Taşlar - Basitleştirilmiş */
+.black-piece {
+    color: #1a1a1a;
+    /* Geçici olarak text-shadow kaldırıldı */
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Unicode Taş Sembolleri */
+.piece-king.white-piece::before { content: '♔'; }
+.piece-queen.white-piece::before { content: '♕'; }
+.piece-rook.white-piece::before { content: '♖'; }
+.piece-bishop.white-piece::before { content: '♗'; }
+.piece-knight.white-piece::before { content: '♘'; }
+.piece-pawn.white-piece::before { content: '♙'; }
+
+.piece-king.black-piece::before { content: '♚'; }
+.piece-queen.black-piece::before { content: '♛'; }
+.piece-rook.black-piece::before { content: '♜'; }
+.piece-bishop.black-piece::before { content: '♝'; }
+.piece-knight.black-piece::before { content: '♞'; }
+.piece-pawn.black-piece::before { content: '♟'; }
+
+/* Drag & Drop Effects */
+.chess-piece.dragging {
+    opacity: 0.7;
+    transform: scale(1.1) rotate(3deg);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.chess-square.drop-target {
+    background-color: #87ceeb !important;
+    box-shadow: inset 0 0 0 3px #4682b4;
+}
+
+/* Hint Highlighting */
+.chess-square.hint-from {
+    background-color: #90ee90 !important;
+    box-shadow: inset 0 0 0 3px #32cd32;
+}
+
+.chess-square.hint-to {
+    background-color: #98fb98 !important;
+    box-shadow: inset 0 0 0 3px #32cd32;
+}
+
+/* Captured Pieces */
+.captured-piece {
+    font-size: 1.4rem;
+    opacity: 0.8;
+    margin: 2px;
+    transition: all 0.2s ease;
+}
+
+.captured-piece:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Move Animation */
+.chess-piece.moving {
+    animation: pieceMove 0.3s ease-in-out;
+}
+
+@keyframes pieceMove {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Promotion Animation */
+.chess-piece.promoting {
+    animation: promotion 0.6s ease-in-out;
+}
+
+@keyframes promotion {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.2) rotate(90deg); }
+    50% { transform: scale(0.8) rotate(180deg); }
+    75% { transform: scale(1.2) rotate(270deg); }
+    100% { transform: scale(1) rotate(360deg); }
+}
+
+/* Coordinate Labels */
+.rank-label, .file-label {
+    transition: color 0.2s ease;
+}
+
+.rank-label:hover, .file-label:hover {
+    color: #ffffff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chess-board {
+        grid-template-columns: repeat(8, 65px);
+        grid-template-rows: repeat(8, 65px);
+    }
+    
+    .chess-square {
+        width: 65px;
+        height: 65px;
+        font-size: 2.8rem;
+    }
+    
+    .chess-piece {
+        font-size: 2.8rem;
+    }
+    
+    .rank-label {
+        height: 65px;
+    }
+    
+    .file-label {
+        width: 65px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chess-board {
+        grid-template-columns: repeat(8, 50px);
+        grid-template-rows: repeat(8, 50px);
+    }
+    
+    .chess-square {
+        width: 50px;
+        height: 50px;
+        font-size: 2.2rem;
+    }
+    
+    .chess-piece {
+        font-size: 2.2rem;
+    }
+    
+    .rank-label {
+        height: 50px;
+        font-size: 0.9rem;
+    }
+    
+    .file-label {
+        width: 50px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Game Over Overlay */
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    z-index: 1000;
+    border: 2px solid #769656;
+}
+
+/* Thinking Indicator */
+.thinking-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid #769656;
+}
+
+/* Touch Support */
+.chess-square.touch-active {
+    background-color: #f7f769 !important;
+}
+
+/* Focus Styles */
+.chess-square:focus {
+    outline: 2px solid #769656;
+    outline-offset: -2px;
+}
+
+/* Print Styles */
+@media print {
+    .chess-board {
+        border-color: #000;
+        box-shadow: none;
+    }
+    
+    .chess-square.light {
+        background-color: #fff;
+    }
+    
+    .chess-square.dark {
+        background-color: #ccc;
+    }
+    
+    .chess-piece {
+        color: #000;
+        text-shadow: none;
+        filter: none;
+    }
+}
