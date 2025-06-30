@@ -1,0 +1,28 @@
+{
+  "name": "chess-game",
+  "version": "1.0.0",
+  "description": "Klasik AI'ya karşı satranç oyunu",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "live-server --port=8080 --entry-file=src/index.html"
+  },
+  "keywords": [
+    "chess",
+    "game",
+    "ai",
+    "javascript"
+  ],
+  "author": "Developer",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  },
+  "dependencies": {
+    "react-scripts": "^5.0.1"
+  }
+}

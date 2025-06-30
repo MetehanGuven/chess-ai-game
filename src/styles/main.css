@@ -1,0 +1,409 @@
+/* Chess.com Tarzı Gerçekçi Tasarım - main.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #312e2b;
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.game-container {
+    max-width: 100vw;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Minimal Header */
+.game-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 15px 0;
+}
+
+.game-header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: 120px;
+}
+
+.player-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #ffffff;
+    padding: 8px 16px;
+    background: #769656;
+    border-radius: 6px;
+}
+
+.captured-pieces {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 35px;
+    padding: 8px;
+    background: #262522;
+    border-radius: 6px;
+    min-width: 120px;
+    border: 1px solid #3d3d3d;
+}
+
+.game-status {
+    text-align: center;
+    background: #262522;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #3d3d3d;
+    min-width: 200px;
+}
+
+.status-display {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.turn-indicator {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    padding: 6px 12px;
+    background: #1a1a1a;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+/* Main Game Layout - Tahta Odaklı */
+.game-main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 400px);
+    gap: 30px;
+    align-items: start;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Chess Board Container - Büyük ve Merkezi */
+.chess-board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.board-coordinates {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: #262522;
+    border-radius: 12px;
+    border: 2px solid #3d3d3d;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.rank-labels {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-right: 8px;
+}
+
+.rank-label {
+    height: 80px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #b0b0b0;
+    font-size: 1rem;
+}
+
+/* Compact Side Panel */
+.game-controls {
+    background: #262522;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #3d3d3d;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.control-group, .difficulty-group, .move-history {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.control-group:last-child, .difficulty-group:last-child, .move-history:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.control-group h3, .difficulty-group h3, .move-history h3 {
+    color: #ffffff;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Chess.com Style Buttons */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: #81b64c;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #769656;
+}
+
+.btn-secondary {
+    background: #f0ad4e;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #ec971f;
+}
+
+.btn-info {
+    background: #5bc0de;
+    color: white;
+}
+
+.btn-info:hover {
+    background: #46b8da;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Difficulty Select */
+.difficulty-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #3d3d3d;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: #1a1a1a;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.difficulty-select:focus {
+    outline: none;
+    border-color: #769656;
+}
+
+/* Move History */
+.moves-list {
+    max-height: 180px;
+    overflow-y: auto;
+    background: #1a1a1a;
+    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid #3d3d3d;
+}
+
+.moves-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.moves-list::-webkit-scrollbar-track {
+    background: #262522;
+}
+
+.moves-list::-webkit-scrollbar-thumb {
+    background: #769656;
+    border-radius: 3px;
+}
+
+.move-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 8px;
+    margin-bottom: 4px;
+    background: #262522;
+    border-radius: 4px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.85rem;
+    color: #ffffff;
+}
+
+.move-number {
+    font-weight: 600;
+    color: #b0b0b0;
+}
+
+/* Footer */
+.game-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #3d3d3d;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.stat {
+    text-align: center;
+    background: #262522;
+    padding: 15px 20px;
+    border-radius: 8px;
+    border: 1px solid #3d3d3d;
+    min-width: 80px;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #b0b0b0;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+/* Captured Pieces Styling */
+.captured-piece {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin: 1px;
+}
+
+/* Status Classes */
+.status-check {
+    color: #f0ad4e !important;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+.status-checkmate {
+    color: #d9534f !important;
+    font-weight: 600;
+}
+
+.status-stalemate, .status-draw {
+    color: #5bc0de !important;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .game-main {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .game-controls {
+        position: static;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+    }
+    
+    .game-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .game-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .game-stats {
+        gap: 15px;
+    }
+    
+    .board-coordinates {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-main {
+        gap: 15px;
+    }
+    
+    .game-controls {
+        padding: 15px;
+    }
+}
